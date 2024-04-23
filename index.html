@@ -18,7 +18,7 @@
                         background-color: #f4f4f9;
                 }
 
-                input#textInput {
+                textarea#textInput {
                         width: 90%;
                         /* Responsive width */
                         padding: 15px;
@@ -32,6 +32,7 @@
                 }
 
                 button {
+                        margin-top: 5px;
                         padding: 15px 30px;
                         font-size: 18px;
                         /* Larger font for readability */
@@ -55,7 +56,7 @@
 </head>
 
 <body>
-        <input type="text" id="textInput" placeholder="Enter your message here">
+        <textarea type="text" id="textInput" placeholder="Enter your message here"></textarea>
         <button onclick="generateImageShare()">Share</button>
         <button onclick="generateImageClipboard()">Generate Image to Clipboard</button>
         <canvas id="textCanvas"></canvas>
