@@ -3,14 +3,61 @@
 
 <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Text to Image Converter</title>
+        <style>
+                body,
+                html {
+                        height: 100%;
+                        margin: 0;
+                        font-family: Arial, sans-serif;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: #f4f4f9;
+                }
+
+                input#textInput {
+                        width: 90%;
+                        /* Responsive width */
+                        padding: 15px;
+                        /* Larger touch area */
+                        font-size: 16px;
+                        /* Readable font size */
+                        margin-bottom: 20px;
+                        /* Spacing between elements */
+                        border: 2px solid #ccc;
+                        border-radius: 8px;
+                }
+
+                button {
+                        padding: 15px 30px;
+                        font-size: 18px;
+                        /* Larger font for readability */
+                        border: none;
+                        border-radius: 8px;
+                        background-color: #007bff;
+                        color: white;
+                        cursor: pointer;
+                        transition: background-color 0.3s;
+                }
+
+                button:hover {
+                        background-color: #0056b3;
+                }
+
+                canvas#textCanvas {
+                        display: none;
+                        /* Hide canvas */
+                }
+        </style>
 </head>
 
 <body>
         <input type="text" id="textInput" placeholder="Enter your message here">
-        <button onclick="generateImageClipboard()">clipboard</button>
-        <button onclick="generateImageShare()">share</button>
-        <canvas id="textCanvas" style="display:none;"></canvas>
+        <button onclick="generateImage()">Generate Image</button>
+        <canvas id="textCanvas"></canvas>
         <script>
                 function generateImageShare() {
                         const canvas = document.getElementById('textCanvas');
