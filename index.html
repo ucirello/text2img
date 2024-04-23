@@ -61,14 +61,32 @@
         <button onclick="generateImageClipboard()">Generate Image to Clipboard</button>
         <canvas id="textCanvas"></canvas>
         <script>
+                function wrapText(context, text, x, y, maxWidth, lineHeight) {
+                        var words = text.split(' ');
+                        var line = '';
+                        for (var n = 0; n < words.length; n++) {
+                                var testLine = line + words[n] + ' ';
+                                var metrics = context.measureText(testLine);
+                                var testWidth = metrics.width;
+                                if (testWidth > maxWidth && n > 0) {
+                                        context.fillText(line, x, y);
+                                        line = words[n] + ' ';
+                                        y += lineHeight;
+                                }
+                                else {
+                                        line = testLine;
+                                }
+                        }
+                        context.fillText(line, x, y);
+                }
                 function generateImageShare() {
                         const canvas = document.getElementById('textCanvas');
                         const ctx = canvas.getContext('2d');
                         const text = document.getElementById('textInput').value;
 
                         // Set canvas size
-                        canvas.width = 800;
-                        canvas.height = 200;
+                        canvas.width = 400;
+                        canvas.height = 800;
 
                         // Optional: Set background color
                         ctx.fillStyle = "#FFF"; // white background
@@ -79,7 +97,7 @@
                         ctx.font = '48px sans-serif';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'middle';
-                        ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+                        wrapText(ctx, text, canvas.width / 2, canvas.height / 2, canvas.width - 40, 48);
 
                         // Convert canvas to PNG
                         canvas.toBlob(blob => {
@@ -107,8 +125,8 @@
                         const text = document.getElementById('textInput').value;
 
                         // Set canvas size
-                        canvas.width = 800;
-                        canvas.height = 200;
+                        canvas.width = 400;
+                        canvas.height = 800;
 
                         // Optional: Set background color
                         ctx.fillStyle = "#FFF"; // white background
@@ -119,7 +137,7 @@
                         ctx.font = '48px sans-serif';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'middle';
-                        ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+                        wrapText(ctx, text, canvas.width / 2, canvas.height / 2, canvas.width - 40, 48);
 
                         // Convert canvas to PNG
                         canvas.toBlob(blob => {
